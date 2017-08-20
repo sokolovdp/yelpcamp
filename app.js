@@ -3,7 +3,6 @@
 var express                   = require("express"),
         app                   = express(),
         flash                 = require("connect-flash"),
-        // seedDB                = require("./seeds"),
         // Campground            = require("./models/campground"),
         // Comment               = require("./models/comment"),
         User                  = require("./models/user"),
@@ -59,7 +58,7 @@ app.use(commentRoutes);
 
 // DEFAULT ROUTE
 app.get("*", function(req, res){
-    res.send("NO SUCH PAGE");
+    res.send("ТАКОЙ СТРАНИЦЫ НЕТ (((");
 });
 
 // START SERVER

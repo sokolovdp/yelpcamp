@@ -3,6 +3,10 @@ var router = express.Router({mergeParams: true});
 var User = require("../models/user");
 var passport = require("passport");
 
+var welcomeMessage = "Добро пожаловать на Сокол!";
+var loginMessage = "Рады снова видеть Вас!";
+var errLoginMessage = "Неверные данные для входа на сайт! Возможно вы не прошли регистрацию..";
+var logoutMessage = "До скорого свидания!";
 
 // HOME ROUTE
 router.get("/", function(req, res){
@@ -20,12 +24,12 @@ router.post("/register", function(req, res){
     
     User.register(newUser, req.body.password, function(err, user){
         if (err) {
-            req.flash("error", "Register error: " + err.message);
+            req.flash("error",  err.message);
             console.log(err);
             res.redirect('/register');
         } else {
             passport.authenticate("local")(req, res, function(){
-                req.flash("success", "Welcome to our site!");
+                req.flash("success", welcomeMessage);
                 res.redirect("/campgrounds"); 
             });
         }
@@ -40,13 +44,13 @@ router.post("/login", passport.authenticate("local",
     {
         successRedirect: "/campgrounds", 
         failureRedirect: "/login",
-        successFlash: 'Welcome back!',
-        failureFlash: 'Invalid login credentials, try again or register'
+        successFlash: loginMessage,
+        failureFlash: errLoginMessage
     }),  function(req, res){});
 
 router.get("/logout", function(req, res){
     req.logout();
-    req.flash("success", "You were logged out!");
+    req.flash("success", logoutMessage);
     res.redirect("/campgrounds");
 });
 
