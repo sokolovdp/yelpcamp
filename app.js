@@ -23,9 +23,9 @@ app.use(methodOverride("_method"));
 app.use(flash());  // use flash messages
 
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://heroku:heroku@ds161860.mlab.com:61860/sokolcamp', {useMongoClient: true});
-// mongoose.connect('mongodb://localhost/yelp_camp', {useMongoClient: true});
-
+// mongoose.connect('mongodb://heroku:heroku@ds161860.mlab.com:61860/sokolcamp', {useMongoClient: true});
+// mongoose.connect('mongodb://localhost/yelp_camp', {useMongoClient: true}); 
+mongoose.connect(process.env.DATABASEURL, {useMongoClient: true});
 mongoose.Promise = global.Promise;
 
 
@@ -63,5 +63,5 @@ app.get("*", function(req, res){
 
 // START SERVER
 app.listen(process.env.PORT, process.env.IP, function(){
-    console.log("YelpCamp server has started...");
+    console.log("YelpCamp server has started, database url=" + process.env.DATABASEURL);
 });
