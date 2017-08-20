@@ -24,7 +24,8 @@ app.use(flash());  // use flash messages
 
 var mongoose = require('mongoose');
 
-mongoose.connect(process.env.DATABASEURL, {useMongoClient: true});
+var databaseUrl = process.env.DATABASEURL || 'mongodb://localhost/yelp_camp';
+mongoose.connect(databaseUrl, {useMongoClient: true});
 mongoose.Promise = global.Promise;
 
 
@@ -62,5 +63,5 @@ app.get("*", function(req, res){
 
 // START SERVER
 app.listen(process.env.PORT, process.env.IP, function(){
-    console.log("YelpCamp server has started, database url=" + process.env.DATABASEURL);
+    console.log("YelpCamp server has started, database url=" + databaseUrl);
 });
