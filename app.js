@@ -24,7 +24,9 @@ app.use(methodOverride("_method"));
 app.use(flash());  // use flash messages
 
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/yelp_camp', {useMongoClient: true});
+mongoose.connect('mongodb://heroku:heroku@ds161860.mlab.com:61860/sokolcamp', {useMongoClient: true});
+// mongoose.connect('mongodb://localhost/yelp_camp', {useMongoClient: true});
+
 mongoose.Promise = global.Promise;
 
 
